@@ -1,8 +1,23 @@
 use bracket_lib::prelude::*;
 
-struct State {}
+enum GameMode {
+    Menu,
+    Playing,
+    End,
+}
+struct State {
+    mode: GameMode,
+}
 
-// IMmplemeting the trait for the struct
+impl State {
+    fn new() -> Self {
+        State {
+            mode: GameMode::Menu,
+        }
+    }
+}
+
+// Implemeting the trait for the struct
 impl GameState for State {
     fn tick(&mut self, ctx: &mut BTerm) {
         ctx.cls();
@@ -12,5 +27,5 @@ impl GameState for State {
 
 fn main() -> BError {
     let context = BTermBuilder::simple80x50().with_title("Flappy").build()?;
-    main_loop(context, State {})
+    main_loop(context, State { mode: todo!() })
 }
